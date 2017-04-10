@@ -18,7 +18,6 @@ public class RayCast : MonoBehaviour {
 		if (Physics.Raycast (landingRay, out hit, range)) {
 			Debug.DrawLine (transform.position, hit.point);
 			GameObject objectHit = hit.transform.gameObject;
-			print(objectHit.tag);
 			if (objectHit.tag == "enemy") {
 				print ("yo");	
 				Destroy (objectHit);

@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour {
   public GameObject ninjaStar;
 
   void Start() {
-    player = GetComponent<Player> ();
+    player = transform.GetComponent<Player> ();
+
     this.lastYAngle = transform.rotation.eulerAngles.y;
     this.currentYAngle = transform.rotation.eulerAngles.y;
   }
