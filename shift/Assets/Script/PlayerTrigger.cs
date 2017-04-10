@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerTrigger : MonoBehaviour {
   private Player player;
+  private bool detectCollisions = true;
 
 	// Use this for initialization
 	void Start () {
@@ -11,18 +12,19 @@ public class PlayerTrigger : MonoBehaviour {
 	}
 
   public void enableTrigger() {
-    gameObject.GetComponent<BoxCollider> ().isTrigger = true;
+		detectCollisions = true;
   }
 
   public void disableTrigger() {
-    gameObject.GetComponent<BoxCollider> ().isTrigger = false;
+		detectCollisions = false;
   }
 
   void OnTriggerEnter(Collider col) {
-    if (col.gameObject.tag == "enemy")
-    {
-      player.loseHealth(col.gameObject.GetComponent<Enemy>().getCollisionDmg());
-    }
+		if (detectCollisions) {
+			if (col.gameObject.tag == "enemy") {
+				player.loseHealth (col.gameObject.GetComponent<Enemy> ().getCollisionDmg ());
+			}
+		}
   }
 
   void OnTriggerExit(Collider col) {}
