@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 
   // Update is called once per frame
   void Update () {
-    if (!player.isDead ()) {
+      if (!player.isDead ()) {
       if (Input.GetAxis ("Horizontal") < 0) {
         Horizontal = -1;
         worldDirection = -1;

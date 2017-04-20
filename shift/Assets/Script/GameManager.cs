@@ -194,13 +194,9 @@ namespace WorldView {
     {
       foreach(Transform item in InvisiList)
       {
-
         if(Mathf.Abs(item.position.x - PlayerController.transform.position.x) < WorldUnits && Mathf.Abs(item.position.z - PlayerController.transform.position.z) < WorldUnits)
         if(PlayerController.transform.position.y - item.position.y <= WorldUnits + 0.2f && PlayerController.transform.position.y - item.position.y >0)
           return true;
-
-
-
       }
       return false;
     }

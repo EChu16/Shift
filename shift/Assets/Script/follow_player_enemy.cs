@@ -26,8 +26,6 @@ public class follow_player_enemy : MonoBehaviour {
 		if (fpsTargetDistance < enemyLookDistance) {
 			myRender.material.color = Color.yellow;
 			lookAtPlayer ();
-			print ("look at player");
-
 		}
 
 		if (fpsTargetDistance < attackDistance) {

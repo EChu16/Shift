@@ -6,10 +6,12 @@ public class Player : MonoBehaviour {
   private float healthPoints;
   private float knockbackForce;
   private PlayerTrigger pt;
+  private float baseAttack;
 
 	// Use this for initialization
 	void Start () {
-    healthPoints = 3;
+    this.healthPoints = 3.0f;
+    this.baseAttack = 1.0f;
     pt = gameObject.GetComponentInChildren<PlayerTrigger> ();
 	}
 
@@ -31,6 +33,14 @@ public class Player : MonoBehaviour {
 
   public void disableHitBox() {
     pt.disableTrigger ();
+  }
+
+  public float getBaseAttack() {
+    return this.baseAttack;
+  }
+
+  public void incrementBaseAtk(float newAtk) {
+    this.baseAttack += newAtk;
   }
 	
 	// Update is called once per frame

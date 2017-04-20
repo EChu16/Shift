@@ -4,13 +4,13 @@ using UnityEngine;
 using WorldView;
 
 public class ProjectileController : MonoBehaviour {
-
 	public float speed;
   private int direction;
   private FacingDirection worldDirection;
   private SpriteRenderer mySpriteRenderer;
   private Vector3 playerPos;
   private float playerYAdjust;
+  private float baseAttack;
   private float focusAxesPosition; // The axes that the projectile will be moving in
   private float expTime;
 
@@ -18,6 +18,7 @@ public class ProjectileController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     this.playerYAdjust = 0.31f;
+    this.baseAttack = GameObject.FindWithTag("Player").GetComponent<Player>().getBaseAttack();
     this.direction = GameObject.FindWithTag("Player").GetComponent<PlayerController>().getDirection();
     this.playerPos = GameObject.FindWithTag ("Player").transform.position;
     this.worldDirection = GameObject.FindWithTag ("GameManager").GetComponent<GameManager> ().getFacingDirection ();
@@ -34,6 +35,10 @@ public class ProjectileController : MonoBehaviour {
     }
     this.expTime = 5.0f;
 	}
+
+  public float getBaseAttack() {
+    return this.baseAttack;
+  }
 	
 	// Update is called once per frame
 	void Update () {

@@ -16,16 +16,11 @@ public class RayCast : MonoBehaviour {
 		RaycastHit hit;
 		Ray landingRay = new Ray (transform.position, Camera.main.transform.forward);
 		if (Physics.Raycast (landingRay, out hit, range)) {
-			Debug.DrawLine (transform.position, hit.point);
 			GameObject objectHit = hit.transform.gameObject;
 			if (objectHit.tag == "enemy") {
-				print ("yo");	
-				Destroy (objectHit);
+				objectHit.gameObject.GetComponent<Enemy>().loseLife(projectile.GetComponent<ProjectileController>().getBaseAttack());
 				Destroy(gameObject);
-
-
-			Debug.DrawLine (transform.position, hit.point);
+			}
 		}
 	}
-}
 }
