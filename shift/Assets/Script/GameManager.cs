@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace WorldView {
   //Used frequently to keep track of the orientation of our player and camera
-  public enum FacingDirection
+	public enum FacingDirection
+
   {
     /// <summary>
     /// The front.
@@ -91,6 +92,7 @@ namespace WorldView {
 
     //Keep track of player and if its dead or not
     private Player player;
+		public GameObject UI; 
 
     public FacingDirection getFacingDirection() {
       return this.facingDirection;
@@ -125,7 +127,12 @@ namespace WorldView {
         if(updateData)
           UpdateLevelData(false);
       }
-
+	 if (!player.isDead()){
+				
+			
+			
+			
+	}
 
       //Handle Player input for rotation command
       if(Input.GetKeyDown(KeyCode.RightArrow))

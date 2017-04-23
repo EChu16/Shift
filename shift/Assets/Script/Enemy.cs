@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour {
   private float hitExpTime;
   private FacingDirection chosenDirection;
   private bool isVisible;
-
+	public GameObject coin; 
 	// Use this for initialization
 	void Start () {
     gm = GameObject.FindWithTag ("GameManager").GetComponent<GameManager>();
@@ -176,6 +176,7 @@ public class Enemy : MonoBehaviour {
     updateEnemyAI ();
     if(isDead()) {
       enemyDieAnimation();
+			Instantiate (coin, transform.position, transform.rotation);	 
     }
 	}
 }
