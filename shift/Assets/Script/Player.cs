@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
   private PlayerTrigger pt;
   private float baseAttack;
 	public GameObject UI;
+  private bool gameOverScreenDisplaying;
+
 	// Use this for initialization
 	void Start () {
     this.healthPoints = 3.0f;
@@ -46,8 +48,10 @@ public class Player : MonoBehaviour {
 	void Update () {
     if (this.isDead ()) {
       //Destroy (gameObject);
-			print ("YOU IS DEAD");
-			Instantiate(UI);
+      if (!gameOverScreenDisplaying) {
+        Instantiate (UI);
+      }
+      gameOverScreenDisplaying = true;
     }
 	}
 }

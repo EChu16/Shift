@@ -335,7 +335,6 @@ namespace WorldView {
         {
           if(item.position.z == cube.z && item.position.y == cube.y && item.position.x < cube.x)
             return true;
-
         }
       }
       return false;

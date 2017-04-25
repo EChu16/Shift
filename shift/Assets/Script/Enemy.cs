@@ -16,11 +16,14 @@ public class Enemy : MonoBehaviour {
   private FacingDirection lastFacingDir;
   private bool isHit = false;
   private float hitExpTime;
-  private FacingDirection chosenDirection;
-  private FacingDirection chosenDirection2;
+  public FacingDirection chosenDirection;
+  public FacingDirection chosenDirection2;
   private bool isVisible;
 	public GameObject coin; 
   private int newDirection;
+  private bool isAttacking;
+  private float attackTime;
+  private float attackRange;
 
 	// Use this for initialization
 	void Start () {
@@ -60,14 +63,16 @@ public class Enemy : MonoBehaviour {
       this.hp = 3.0f;
       this.movementSpeed = 2.0f;
       this.collisionDmg = 1.0f;
+      this.attackRange = 1.0f;
+      // Shield planes
+      this.chosenDirection = (FacingDirection)Random.Range (0, 1);
+      this.chosenDirection2 = (FacingDirection)Random.Range (2, 3);
     } else if(this.id == Mob.BED_MONSTER) {
       this.hp = 4.0f;
       this.movementSpeed = .5f;
       this.collisionDmg = 2.0f;
-      // Shield planes
-      this.chosenDirection = (FacingDirection)Random.Range (0, 1);
-      this.chosenDirection2 = (FacingDirection)Random.Range (2, 3);
     }
+    this.isAttacking = false;
   }
 
   public float getCollisionDmg() {
@@ -104,11 +109,11 @@ public class Enemy : MonoBehaviour {
   private void moveEnemyOn(char axis) {
     var moveFactor = currentDirection * movementSpeed * Time.deltaTime;
     if (axis == 'x') {
-      if (this.id == Mob.SLIME || this.id == Mob.BED_MONSTER) {
+      if (this.id == Mob.SLIME || this.id == Mob.BED_MONSTER || this.id == Mob.KNIGHT) {
         transform.position = new Vector3 (this.transform.position.x + moveFactor, this.transform.position.y, this.transform.position.z);
       }
     } else {
-      if (this.id == Mob.SLIME || this.id == Mob.BED_MONSTER) {
+      if (this.id == Mob.SLIME || this.id == Mob.BED_MONSTER || this.id == Mob.KNIGHT) {
         transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + moveFactor);
       }
     }
@@ -162,8 +167,28 @@ public class Enemy : MonoBehaviour {
         this.movementSpeed = 1f;
       }
 
-      if (dist <= 1f) {
+      if (dist <= 0.5f && !isAttacking) {
+        Vector3 size = GetComponent<BoxCollider> ().size;
         //attack AI
+        GetComponent<BoxCollider>().size = new Vector3(size.x + this.attackRange, size.y, size.z + this.attackRange);
+        isAttacking = true;
+        attackTime = 2f;
+      }
+
+      if (isAttacking) {
+        if (attackTime > 0) {
+          attackTime -= Time.deltaTime;
+        } else {
+          Vector3 size = GetComponent<BoxCollider> ().size;
+          isAttacking = false;
+          GetComponent<BoxCollider> ().size = new Vector3 (size.x - this.attackRange, size.y, size.z - this.attackRange);
+        }
+      } else {
+        newDirection = isPlayerLeftOrRight ();
+        if (currentDirection != newDirection) {
+          transform.RotateAround (transform.position, transform.up, 180f);
+          currentDirection = newDirection;
+        }
       }
 
       // Bed Monster AI

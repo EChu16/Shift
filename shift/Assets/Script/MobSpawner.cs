@@ -27,6 +27,7 @@ public class MobSpawner : MonoBehaviour {
     if (gm.getFacingDirection() == spawnInView && distanceFromPlayer() <= distanceTillActive) {
       var enemy = Instantiate (mob, new Vector3(transform.position.x-1f, transform.position.y+.5f, transform.position.z), transform.rotation);
       enemy.GetComponent<Enemy>().setChosenDirection (spawnInView);
+      enemy.GetComponent<Hideshow> ().spawnAnim ();
       this.spawned = true;
     }
   }
