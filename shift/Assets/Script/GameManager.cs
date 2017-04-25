@@ -137,35 +137,43 @@ namespace WorldView {
       //Handle Player input for rotation command
       if(Input.GetKeyDown(KeyCode.RightArrow))
       {
-        player.disableHitBox ();
-        //If we rotate while on an invisible platform we must move to a physical platform
-        //If we don't, then we could be standing in mid air after the rotation
-        if(OnInvisiblePlatform())
-        {
-          //MoveToClosestPlatform();
-          MovePlayerDepthToClosestPlatform();
-        }
-        lastfacing = facingDirection;
-        facingDirection = RotateDirectionRight();
-        degree-=90f;
-        UpdateLevelData(false);
-        PlayerController.UpdateToFacingDirection(facingDirection, degree);
+		RotateWorldRight ();
       }
       else if( Input.GetKeyDown(KeyCode.LeftArrow))
       {
-        player.disableHitBox ();
-        if(OnInvisiblePlatform())
-        {
-          //MoveToClosestPlatform();
-          MovePlayerDepthToClosestPlatform();
-        }
-        lastfacing = facingDirection;
-        facingDirection = RotateDirectionLeft();
-        degree+=90f;
-        UpdateLevelData(false);
-        PlayerController.UpdateToFacingDirection(facingDirection, degree);
+		RotateWorldLeft ();
       }
     }
+	
+	public void RotateWorldLeft(){
+		player.disableHitBox ();
+		if(OnInvisiblePlatform())
+		{
+			//MoveToClosestPlatform();
+			MovePlayerDepthToClosestPlatform();
+		}
+		lastfacing = facingDirection;
+		facingDirection = RotateDirectionLeft();
+		degree+=90f;
+		UpdateLevelData(false);
+		PlayerController.UpdateToFacingDirection(facingDirection, degree);
+	}
+	public void RotateWorldRight(){
+		player.disableHitBox ();
+		//If we rotate while on an invisible platform we must move to a physical platform
+		//If we don't, then we could be standing in mid air after the rotation
+		if(OnInvisiblePlatform())
+		{
+			//MoveToClosestPlatform();
+			MovePlayerDepthToClosestPlatform();
+		}
+		lastfacing = facingDirection;
+		facingDirection = RotateDirectionRight();
+		degree-=90f;
+		UpdateLevelData(false);
+		PlayerController.UpdateToFacingDirection(facingDirection, degree);
+	}
+
     /// <summary>
     /// Destroy current invisible platforms
     /// Create new invisible platforms taking into account the
