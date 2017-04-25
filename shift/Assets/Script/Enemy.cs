@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour {
   private FacingDirection chosenDirection2;
   private bool isVisible;
 	public GameObject coin; 
+  private int newDirection;
+
 	// Use this for initialization
 	void Start () {
     gm = GameObject.FindWithTag ("GameManager").GetComponent<GameManager>();
@@ -168,19 +170,10 @@ public class Enemy : MonoBehaviour {
     } else if (this.id == Mob.BED_MONSTER) {
       displayHitAnimIfHit ();
       // Move effect
-      if (gm.getFacingDirection () == this.chosenDirection) {
-    
-        this.isVisible = false;
-      } else {
-      
-        this.isVisible = true;
-      }
-      if (this.isVisible) {
-        int newDirection = isPlayerLeftOrRight ();
-        if (currentDirection != newDirection) {
-          transform.RotateAround (transform.position, transform.up, 180f);
-          currentDirection = newDirection;
-        }
+      newDirection = isPlayerLeftOrRight ();
+      if (currentDirection != newDirection) {
+        transform.RotateAround (transform.position, transform.up, 180f);
+        currentDirection = newDirection;
       }
     }
 
