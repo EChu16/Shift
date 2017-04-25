@@ -108,12 +108,15 @@ public class Enemy : MonoBehaviour {
 
   private void moveEnemyOn(char axis) {
     var moveFactor = currentDirection * movementSpeed * Time.deltaTime;
+    if (this.id == Mob.SLIME) {
+      transform.position = new Vector3 (this.transform.position.x + moveFactor, this.transform.position.y, this.transform.position.z + moveFactor);
+    }
     if (axis == 'x') {
-      if (this.id == Mob.SLIME || this.id == Mob.BED_MONSTER || this.id == Mob.KNIGHT) {
+      if (this.id == Mob.BED_MONSTER || this.id == Mob.KNIGHT) {
         transform.position = new Vector3 (this.transform.position.x + moveFactor, this.transform.position.y, this.transform.position.z);
       }
     } else {
-      if (this.id == Mob.SLIME || this.id == Mob.BED_MONSTER || this.id == Mob.KNIGHT) {
+      if (this.id == Mob.BED_MONSTER || this.id == Mob.KNIGHT) {
         transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + moveFactor);
       }
     }
