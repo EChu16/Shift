@@ -128,10 +128,10 @@ public class Enemy : MonoBehaviour {
       }
       // Move effect
       if (gm.getFacingDirection () == this.chosenDirection) {
-        GetComponent<MeshRenderer> ().enabled = false;
+    
         this.isVisible = false;
       } else {
-        GetComponent<MeshRenderer> ().enabled = true;
+      
         this.isVisible = true;
       }
       if (this.isVisible) {
