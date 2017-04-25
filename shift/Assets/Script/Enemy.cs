@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using WorldView;
 
-public enum Mob {
-  SLIME = 0,
-  KNIGHT = 1,
-  BED_MONSTER = 2
-}
-
 public class Enemy : MonoBehaviour {
   public Mob id;
   private GameManager gm;
@@ -23,7 +17,9 @@ public class Enemy : MonoBehaviour {
   private bool isHit = false;
   private float hitExpTime;
   private FacingDirection chosenDirection;
+  private FacingDirection chosenDirection2;
   private bool isVisible;
+
 
 	// Use this for initialization
 	void Start () {
@@ -59,10 +55,17 @@ public class Enemy : MonoBehaviour {
       this.movementSpeed = .5f;
       this.collisionDmg = 1.0f;
       // set this.AnimController = "";
+    } else if (this.id == Mob.KNIGHT) {
+      this.hp = 3.0f;
+      this.movementSpeed = 2.0f;
+      this.collisionDmg = 1.0f;
     } else if(this.id == Mob.BED_MONSTER) {
       this.hp = 4.0f;
       this.movementSpeed = .5f;
-      this.collisionDmg = 1.0f;
+      this.collisionDmg = 2.0f;
+      // Shield planes
+      this.chosenDirection = (FacingDirection)Random.Range (0, 1);
+      this.chosenDirection2 = (FacingDirection)Random.Range (2, 3);
     }
   }
 
@@ -70,9 +73,31 @@ public class Enemy : MonoBehaviour {
     return collisionDmg;
   }
 
-  //Euclidean Distance
+  public Mob getType() {
+    return this.id;
+  }
+
+  public FacingDirection getChosenDir1() {
+    return this.chosenDirection;
+  }
+
+  public FacingDirection getChosenDir2() {
+    return this.chosenDirection2;
+  }
+
+  //Euclidean Distance 3D Space
   private float distanceFromPlayer() {
     return Mathf.Sqrt (Mathf.Pow (player.transform.position.x - transform.position.x, 2f) + Mathf.Pow (player.transform.position.y - transform.position.y, 2f) + Mathf.Pow (player.transform.position.z - transform.position.z, 2f));
+  }
+
+  //Distance Formula 2D Space
+  private float flatDistanceFromPlayer() {
+    var facingDir = gm.getFacingDirection ();
+    if (facingDir == FacingDirection.Front || facingDir == FacingDirection.Back) {
+      return Mathf.Sqrt (Mathf.Pow (player.transform.position.x - transform.position.x, 2f) + Mathf.Pow (player.transform.position.y - transform.position.y, 2f));
+    } else {
+      return Mathf.Sqrt (Mathf.Pow (player.transform.position.z - transform.position.z, 2f) + Mathf.Pow (player.transform.position.y - transform.position.y, 2f));
+    }
   }
 
   private void moveEnemyOn(char axis) {
@@ -88,21 +113,24 @@ public class Enemy : MonoBehaviour {
     }
   }
 
+  private void displayHitAnimIfHit() {
+    if (this.isHit) {
+      this.hitExpTime -= Time.deltaTime;
+      //Set anim hit
+      if (this.hitExpTime <= 0) {
+        this.isHit = false;
+        // Set anim normal
+      }
+    }
+  }
+
   private void updateEnemyAI() {
     // Get Facing Direction
     var facingDir = gm.getFacingDirection ();
 
     // Slime AI
     if (this.id == Mob.SLIME) {
-      // Hit effect
-      if (this.isHit) {
-        this.hitExpTime -= Time.deltaTime;
-        //Set anim hit
-        if (this.hitExpTime <= 0) {
-          this.isHit = false;
-          //Set anim normal
-        }
-      }
+      displayHitAnimIfHit ();
       // Move effect
       if (this.walkExpTime <= 0) {
         currentDirection *= -1;
@@ -112,20 +140,34 @@ public class Enemy : MonoBehaviour {
         walkExpTime -= Time.deltaTime;
       }
       // Rotating for slimes
-      if(lastFacingDir != facingDir) {
-        transform.RotateAround(transform.position, transform.up, 180f);
+      if (lastFacingDir != facingDir) {
+        transform.RotateAround (transform.position, transform.up, 180f);
+      }
+
+      // Knight AI
+    } else if (this.id == Mob.KNIGHT) {
+      // Hit Effect
+      displayHitAnimIfHit ();
+      int newDirection = isPlayerLeftOrRight ();
+      if (currentDirection != newDirection) {
+        transform.RotateAround (transform.position, transform.up, 180f);
+        currentDirection = newDirection;
+      }
+
+      float dist = flatDistanceFromPlayer ();
+      if ((this.chosenDirection == facingDir || this.chosenDirection2 == facingDir)) {
+        this.movementSpeed = 0f;
+      } else if(dist <= 5f){
+        this.movementSpeed = 1f;
+      }
+
+      if (dist <= 1f) {
+        //attack AI
       }
 
       // Bed Monster AI
     } else if (this.id == Mob.BED_MONSTER) {
-      // Hit effect
-      if (this.isHit) {
-        this.hitExpTime -= Time.deltaTime;
-        //Set anim hit
-        if (this.hitExpTime <= 0) {
-          this.isHit = false;
-        }
-      }
+      displayHitAnimIfHit ();
       // Move effect
       if (gm.getFacingDirection () == this.chosenDirection) {
         GetComponent<MeshRenderer> ().enabled = false;
@@ -135,7 +177,11 @@ public class Enemy : MonoBehaviour {
         this.isVisible = true;
       }
       if (this.isVisible) {
-        currentDirection = isPlayerLeftOrRight ();
+        int newDirection = isPlayerLeftOrRight ();
+        if (currentDirection != newDirection) {
+          transform.RotateAround (transform.position, transform.up, 180f);
+          currentDirection = newDirection;
+        }
       }
     }
 
@@ -160,10 +206,6 @@ public class Enemy : MonoBehaviour {
 
   private bool isDead() {
     return this.hp <= 0.0f;
-  }
-
-  private Mob getType() {
-    return this.id;
   }
 
   private void enemyDieAnimation() {

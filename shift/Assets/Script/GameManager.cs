@@ -24,6 +24,12 @@ namespace WorldView {
     Left = 3
   }
 
+  public enum Mob {
+    SLIME = 0,
+    KNIGHT = 1,
+    BED_MONSTER = 2
+  }
+
 
   /// <summary>
   /// Fez manager creates invisible cubes for the player to move on. The world is based in 3D to allow rotation, this means
