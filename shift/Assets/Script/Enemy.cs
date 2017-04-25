@@ -19,8 +19,7 @@ public class Enemy : MonoBehaviour {
   private FacingDirection chosenDirection;
   private FacingDirection chosenDirection2;
   private bool isVisible;
-
-
+	public GameObject coin; 
 	// Use this for initialization
 	void Start () {
     gm = GameObject.FindWithTag ("GameManager").GetComponent<GameManager>();
@@ -170,10 +169,10 @@ public class Enemy : MonoBehaviour {
       displayHitAnimIfHit ();
       // Move effect
       if (gm.getFacingDirection () == this.chosenDirection) {
-        GetComponent<MeshRenderer> ().enabled = false;
+    
         this.isVisible = false;
       } else {
-        GetComponent<MeshRenderer> ().enabled = true;
+      
         this.isVisible = true;
       }
       if (this.isVisible) {
@@ -218,6 +217,7 @@ public class Enemy : MonoBehaviour {
     updateEnemyAI ();
     if(isDead()) {
       enemyDieAnimation();
+			Instantiate (coin, transform.position, transform.rotation);	 
     }
 	}
 }

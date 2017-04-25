@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
   private float knockbackForce;
   private PlayerTrigger pt;
   private float baseAttack;
-
+	public GameObject UI;
 	// Use this for initialization
 	void Start () {
     this.healthPoints = 3.0f;
@@ -30,7 +30,6 @@ public class Player : MonoBehaviour {
   public void enableHitBox() {
     pt.enableTrigger ();
   }
-
   public void disableHitBox() {
     pt.disableTrigger ();
   }
@@ -46,7 +45,9 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     if (this.isDead ()) {
-      Destroy (gameObject);
+      //Destroy (gameObject);
+			print ("YOU IS DEAD");
+			Instantiate(UI);
     }
 	}
 }
