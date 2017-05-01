@@ -8,7 +8,7 @@ public class changeScene : MonoBehaviour {
 		
 	public void Restart(string changeTheScene){
 		print ("yesss");
-		SceneManager.LoadScene ("Shift");
+		SceneManager.LoadScene (changeTheScene);
 	}
 
 }
