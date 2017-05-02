@@ -143,14 +143,14 @@ namespace WorldView {
 	}
 
       //Handle Player input for rotation command
-      if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftArrow) && rotateDelay <= 0)
+      if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftArrow) && rotateDelay <= 0 && facingDirection == FacingDirection.Left)
       {
-        rotateDelay = 3.0f;
+        rotateDelay = 1.5f;
         RotateWorldRight ();
       }
-      else if( Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.RightArrow) && rotateDelay <= 0)
+      else if( Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.RightArrow) && rotateDelay <= 0 && facingDirection == FacingDirection.Front)
       {
-        rotateDelay = 3.0f;
+        rotateDelay = 1.5f;
         RotateWorldLeft ();
       }
 

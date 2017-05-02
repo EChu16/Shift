@@ -65,8 +65,8 @@ public class Enemy : MonoBehaviour {
       this.collisionDmg = 1.0f;
       this.attackRange = 1.0f;
       // Shield planes
-      this.chosenDirection = (FacingDirection)Random.Range (0, 1);
-      this.chosenDirection2 = (FacingDirection)Random.Range (2, 3);
+      this.chosenDirection = FacingDirection.Front;
+      this.chosenDirection2 = FacingDirection.Left;
     } else if(this.id == Mob.BED_MONSTER) {
       this.hp = 4.0f;
       this.movementSpeed = .5f;
