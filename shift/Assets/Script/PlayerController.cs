@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
   private FacingDirection _myFacingDirection;
   private bool isGrounded = true;
   public bool isJumping = false;
-  private float jumpForce = 4f;
+  public float jumpForce = 6f;
   public float degree = 0;
   private bool finishedSlerp = true;
   private float lastYAngle;
