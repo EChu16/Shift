@@ -4,8 +4,8 @@ using UnityEngine;
 using WorldView;
 
 public class ProjectileController : MonoBehaviour {
-	public float speed;
-  private int direction;
+	private float speed;
+  public int direction;
   private FacingDirection worldDirection;
   private SpriteRenderer mySpriteRenderer;
   private Vector3 playerPos;
@@ -17,9 +17,9 @@ public class ProjectileController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+    this.speed = GameObject.FindWithTag("Player").GetComponent<Player>().getAttackSpeed();
     this.playerYAdjust = 0.31f;
     this.baseAttack = GameObject.FindWithTag("Player").GetComponent<Player>().getBaseAttack();
-    this.direction = GameObject.FindWithTag("Player").GetComponent<PlayerController>().getDirection();
     this.playerPos = GameObject.FindWithTag ("Player").transform.position;
     this.worldDirection = GameObject.FindWithTag ("GameManager").GetComponent<GameManager> ().getFacingDirection ();
     if (this.worldDirection == FacingDirection.Front) {

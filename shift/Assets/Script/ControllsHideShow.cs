@@ -17,17 +17,24 @@ public class ControllsHideShow : MonoBehaviour {
 	void Update () {
 
 
-		if (change = true){
-			sprite_renderer.enabled = false;
+	
 
-		}
+	
 	}
 
 	private void OnTriggerStay(Collider other){
-		print ("intrigger");
-		if(Input.GetKey(KeyCode.Y))
+		print ("in loop");
+		if(Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.LeftArrow) ))
 			{
-		change = true;
+			print ("sprite render");
+			sprite_renderer.enabled = false;
+
+		}
+
+		if(Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.RightArrow) ))
+		{
+			print ("sprite render");
+			sprite_renderer.enabled = false;
 
 		}
 

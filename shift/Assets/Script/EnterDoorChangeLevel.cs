@@ -30,7 +30,7 @@ public class EnterDoorChangeLevel : MonoBehaviour {
 		
 
 
-		//	Application.LoadLevel (leveltoload);
+		Application.LoadLevel (leveltoload);
 		
 		}
 
