@@ -35,7 +35,7 @@ public class MobSpawner : MonoBehaviour {
 
 			if (rotateDelay < 0) {
 				print ("rotatedelay");
-				anim.SetBool ("GhostSpawn ", true);
+				//anim.SetBool ("GhostSpawn ", true);
 			} else {
 				spawndelay -= Time.deltaTime;
 			}
@@ -51,8 +51,8 @@ public class MobSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!this.spawned) {
-      spawnMobIfOnPlane();
-	
+      //spawnMobIfOnPlane();
+		
     }
 	}
 
@@ -60,7 +60,7 @@ public void SpawnENEMY(){
 	var enemy = Instantiate (mob, new Vector3 (transform.position.x, transform.position.y , transform.position.z), transform.rotation);
 	enemy.GetComponent<Enemy> ().setChosenDirection (spawnInView);
 	//enemy.GetComponent<Hideshow> ().spawnAnim ();
-	this.spawned = true;
+	//this.spawned = true;
 
 
 
