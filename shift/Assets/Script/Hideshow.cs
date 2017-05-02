@@ -8,7 +8,7 @@ public class Hideshow : MonoBehaviour {
 	public Transform EnemySpawn;
   private float delay = 1.2f;
   private bool hasSpawn = false;
-
+	public MobSpawner spawner;
 	// Use this for initialization
 	void Start () {
 		anim = gameObject.GetComponent<Animator> ();
@@ -16,15 +16,7 @@ public class Hideshow : MonoBehaviour {
 	}
 
   public void spawnAnim() {
-    if (this.delay > 0) {
-      this.delay -= Time.deltaTime;
-    } else {
-      anim.SetBool ("GhostSpawn ", true);
-      Instantiate (Ghost, EnemySpawn.position, EnemySpawn.rotation);
-    }
-    if (hasSpawn) {
-      anim.SetBool ("GhostSpawn ", false);
-    }
+		spawner.SpawnENEMY ();
   }
 	
 	// Update is called once per frame
