@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
   private float knockbackForce;
   private PlayerTrigger pt;
   private float baseAttack;
+  private float attackSpeed;
 	public GameObject UI;
   private bool gameOverScreenDisplaying;
 
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour {
 	void Start () {
     this.healthPoints = 3.0f;
     this.baseAttack = 1.0f;
+    this.attackSpeed = 3.0f;
     pt = gameObject.GetComponentInChildren<PlayerTrigger> ();
 	}
 
@@ -42,6 +44,14 @@ public class Player : MonoBehaviour {
 
   public void incrementBaseAtk(float newAtk) {
     this.baseAttack += newAtk;
+  }
+
+  public float getAttackSpeed() {
+    return this.attackSpeed;
+  }
+
+  public void incrementAttackSpeed(float newAtkSpeed) {
+    this.attackSpeed += newAtkSpeed;
   }
 	
 	// Update is called once per frame

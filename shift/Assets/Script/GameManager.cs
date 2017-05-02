@@ -89,6 +89,8 @@ namespace WorldView {
     //of our Invisicubes
     private float lastDepth = 0f;
 
+    private float rotateDelay = 0f;
+
     //Dimensions of cubes used - so far only tested with 1. This could potentially be updated if cubes of a different
     //size are needed - Note: All cubes must be same size
     /// <summary>
@@ -141,13 +143,19 @@ namespace WorldView {
 	}
 
       //Handle Player input for rotation command
-      if(Input.GetKeyDown(KeyCode.RightArrow))
+      if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftArrow) && rotateDelay <= 0)
       {
-		RotateWorldRight ();
+        rotateDelay = 3.0f;
+        RotateWorldRight ();
       }
-      else if( Input.GetKeyDown(KeyCode.LeftArrow))
+      else if( Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.RightArrow) && rotateDelay <= 0)
       {
-		RotateWorldLeft ();
+        rotateDelay = 3.0f;
+        RotateWorldLeft ();
+      }
+
+      if (rotateDelay > 0) {
+        rotateDelay -= Time.deltaTime;
       }
     }
 	

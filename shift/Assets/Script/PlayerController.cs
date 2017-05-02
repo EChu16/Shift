@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
   private bool finishedSlerp = true;
   private float lastYAngle;
   private float currentYAngle;
+  private float shootDelay = 0f;
 
   public Transform firePoint;
   public GameObject ninjaStar;
@@ -88,8 +89,26 @@ public class PlayerController : MonoBehaviour {
         player.enableHitBox ();
       }
 
-      if (Input.GetKeyDown (KeyCode.Return)) {
-        Instantiate (ninjaStar, firePoint.position, firePoint.rotation);
+      if (Input.GetKey (KeyCode.LeftArrow) && shootDelay <= 0) {
+        shootDelay = 1.0f;
+        if (worldDirection != -1) {
+          worldDirection = -1;
+          gameObject.GetComponentInChildren<SpriteRenderer> ().flipX = false;
+        }
+        ProjectileController obj = Instantiate (ninjaStar, firePoint.position, firePoint.rotation).GetComponent<ProjectileController>();
+        obj.direction = -1;
+      } else if (Input.GetKey (KeyCode.RightArrow) && shootDelay <= 0) {
+        shootDelay = 1.0f;
+        if (worldDirection != 1) {
+          worldDirection = 1;
+          gameObject.GetComponentInChildren<SpriteRenderer> ().flipX = true;
+        }
+        ProjectileController obj = Instantiate (ninjaStar, firePoint.position, firePoint.rotation).GetComponent<ProjectileController>();
+        obj.direction = 1;
+      }
+
+      if (shootDelay > 0) {
+        shootDelay -= Time.deltaTime;
       }
     }
 
