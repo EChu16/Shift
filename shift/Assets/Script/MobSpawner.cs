@@ -33,13 +33,7 @@ public class MobSpawner : MonoBehaviour {
 
     if (gm.getFacingDirection() == spawnInView && distanceFromPlayer() <= distanceTillActive) {
 
-			if (rotateDelay < 0) {
-				print ("rotatedelay");
-				//anim.SetBool ("GhostSpawn ", true);
-			} else {
-				spawndelay -= Time.deltaTime;
-			}
-
+	
 				//var enemy = Instantiate (mob, new Vector3 (transform.position.x - 1f, transform.position.y + .5f, transform.position.z), transform.rotation);
 				//enemy.GetComponent<Enemy> ().setChosenDirection (spawnInView);
 				//enemy.GetComponent<Hideshow> ().spawnAnim ();
@@ -59,8 +53,10 @@ public class MobSpawner : MonoBehaviour {
 public void SpawnENEMY(){
 	var enemy = Instantiate (mob, new Vector3 (transform.position.x, transform.position.y , transform.position.z), transform.rotation);
 	enemy.GetComponent<Enemy> ().setChosenDirection (spawnInView);
+		anim.SetBool ("spawn", false);
 	//enemy.GetComponent<Hideshow> ().spawnAnim ();
 	//this.spawned = true;
+
 
 
 
