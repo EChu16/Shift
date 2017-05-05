@@ -10,12 +10,14 @@ public class Player : MonoBehaviour {
   private float attackSpeed;
 	public GameObject UI;
   private bool gameOverScreenDisplaying;
+  private displayGUI dg;
 
 	// Use this for initialization
 	void Start () {
     this.baseAttack = 1.0f;
     this.attackSpeed = 3.0f;
     pt = gameObject.GetComponentInChildren<PlayerTrigger> ();
+    dg = GameObject.FindWithTag ("displayGUI").GetComponent<displayGUI>();
     this.gameOverScreenDisplaying = false;
 	}
 
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour {
 
   public void loseHealth(float hp) {
     this.healthPoints -= hp;
+    dg.losePlayerLife ();
   }
 
   public bool isDead() {

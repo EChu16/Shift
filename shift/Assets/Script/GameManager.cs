@@ -101,8 +101,6 @@ namespace WorldView {
     //Keep track of player and if its dead or not
     private Player player;
 		public GameObject UI; 
-    public GameObject displayGUI;
-    private displayGUI dg;
 
     public FacingDirection getFacingDirection() {
       return this.facingDirection;
@@ -115,7 +113,6 @@ namespace WorldView {
       facingDirection = FacingDirection.Front;
       PlayerController = Player.GetComponent<PlayerController> ();
       player = Player.GetComponent<Player> ();
-      dg = displayGUI.GetComponent<displayGUI> ();
       UpdateLevelData (true);
     }
 
