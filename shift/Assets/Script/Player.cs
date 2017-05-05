@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-  private float healthPoints;
+  private float healthPoints = 3.0f;
   private float knockbackForce;
   private PlayerTrigger pt;
   private float baseAttack;
@@ -13,7 +13,6 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-    this.healthPoints = 3.0f;
     this.baseAttack = 1.0f;
     this.attackSpeed = 3.0f;
     pt = gameObject.GetComponentInChildren<PlayerTrigger> ();

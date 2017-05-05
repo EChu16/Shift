@@ -66,7 +66,6 @@ public class Enemy : MonoBehaviour {
       this.attackRange = 1.0f;
       // Shield planes
       this.chosenDirection = FacingDirection.Front;
-      this.chosenDirection2 = FacingDirection.Left;
     } else if(this.id == Mob.BED_MONSTER) {
       this.hp = 4.0f;
       this.movementSpeed = .5f;
@@ -164,7 +163,7 @@ public class Enemy : MonoBehaviour {
       }
 
       float dist = flatDistanceFromPlayer ();
-      if ((this.chosenDirection == facingDir || this.chosenDirection2 == facingDir)) {
+      if ((this.chosenDirection == facingDir)) {
         this.movementSpeed = 0f;
       } else if(dist <= 5f){
         this.movementSpeed = 1f;
@@ -238,7 +237,7 @@ public class Enemy : MonoBehaviour {
     updateEnemyAI ();
     if(isDead()) {
       enemyDieAnimation();
-			Instantiate (coin, transform.position, transform.rotation);	 
+			Instantiate (coin, transform.position, Quaternion.identity);	 
     }
 	}
 }
