@@ -5,7 +5,7 @@ public class AutoSnap : EditorWindow
 {
 	private Vector3 prevPosition;
 	private bool doSnap = true;
-	private float snapValue = 1;
+	private float snapValue = 1.0f;
 	private bool Initi = false;
 	[MenuItem( "Edit/Auto Snap %_l" )]
 	static void Init()

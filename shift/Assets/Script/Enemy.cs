@@ -238,7 +238,7 @@ public class Enemy : MonoBehaviour {
     updateEnemyAI ();
     if(isDead()) {
       enemyDieAnimation();
-			Instantiate (coin, transform.position, transform.rotation);	 
+			Instantiate (coin, transform.position, Quaternion.identity);	 
     }
 	}
 }
