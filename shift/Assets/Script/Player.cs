@@ -24,10 +24,11 @@ public class Player : MonoBehaviour {
 
   public void loseHealth(float hp) {
     this.healthPoints -= hp;
+		Debug.Log (healthPoints);
   }
 
   public bool isDead() {
-    return this.healthPoints == 0;
+    return this.healthPoints <= 0;
   }
 
   public void enableHitBox() {
