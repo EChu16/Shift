@@ -29,10 +29,9 @@ public class displayGUI : MonoBehaviour {
 
   // Instantiate heart icons for both players
   private void instantiatePlayerLifeIcons() {
-    Debug.Log (gameObject.transform.position);
     for (float i = 0; i < this.initialPlayerLives; i++) {
       this.playerLives.Add(Instantiate(heartPrefab, new Vector3(camera.transform.position.x - 6.5f + (i/3), camera.transform.position.y + 3.8f, camera.transform.position.z + 6f), heartPrefab.transform.rotation) as GameObject);
-      this.playerLives [(int)i].transform.parent = gameObject.transform;
+      this.playerLives [(int)i].transform.parent = Camera.main.transform;
     }
   }
 
@@ -53,6 +52,7 @@ public class displayGUI : MonoBehaviour {
   }
 
   private void renderGUI(Vector3 positionDiff) {
+    Debug.Log (positionDiff);
     gameObject.transform.Translate (positionDiff);
     lastCameraPos = camera.transform.position;
   }
@@ -60,11 +60,7 @@ public class displayGUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     if (!player.isDead()) {
-      if (gm.getFacingDirection () == FacingDirection.Front) {
-        renderGUI (new Vector3 (camera.transform.position.x - lastCameraPos.x, camera.transform.position.y - lastCameraPos.y, 0));
-      } else {
-        renderGUI (new Vector3 (0, camera.transform.position.y - lastCameraPos.y, camera.transform.position.z - lastCameraPos.z));
-      }
+      renderGUI (new Vector3 (camera.transform.position.x - lastCameraPos.x, camera.transform.position.y - lastCameraPos.y, camera.transform.position.z - lastCameraPos.z));
     }
 	}
 }

@@ -11,7 +11,7 @@ public class MobSpawner : MonoBehaviour {
   private GameObject player;
   public float distanceTillActive;
   public float spawndelay;
-  public float rotateDelay; 
+  public float rotateDelay;
   public GameObject bedfront;
   Animator anim;
 

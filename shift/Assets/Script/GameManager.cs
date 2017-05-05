@@ -108,7 +108,6 @@ namespace WorldView {
 
     // Use this for initialization
     void Start () {
-
       //Define our facing direction, must be the same as built in inspector
       //Cache our PlayerController script located on the player and update our level data (create invisible cubes)
       facingDirection = FacingDirection.Front;
@@ -246,7 +245,7 @@ namespace WorldView {
             if(PlayerController.transform.position.y - item.position.y <= WorldUnits + 0.2f && PlayerController.transform.position.y - item.position.y >0 && !PlayerController.isJumping)
             {
               if(facingDirection == FacingDirection.Front && item.position.z < PlayerController.transform.position.z)
-                moveCloser = true;
+                moveCloser = true;  
 
               if(facingDirection == FacingDirection.Back && item.position.z > PlayerController.transform.position.z)
                 moveCloser = true;
