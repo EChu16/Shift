@@ -63,7 +63,9 @@ public class Player : MonoBehaviour {
     if (this.isDead ()) {
       //Destroy (gameObject);
       if (!gameOverScreenDisplaying) {
-        Instantiate (UI);
+				GameObject gameOverUI =  Instantiate (UI);
+				gameOverUI.GetComponent<Canvas>().worldCamera = Camera.main;
+				gameOverUI.GetComponent<Canvas> ().planeDistance = 10;
       }
       gameOverScreenDisplaying = true;
     }

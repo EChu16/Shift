@@ -166,7 +166,7 @@ public class Enemy : MonoBehaviour {
       if ((this.chosenDirection == facingDir)) {
         this.movementSpeed = 0f;
       } else if(dist <= 5f){
-        this.movementSpeed = 1f;
+        this.movementSpeed = 0.0f;
       }
 
       if (dist <= 0.5f && !isAttacking) {
