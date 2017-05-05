@@ -31,11 +31,8 @@ public class displayGUI : MonoBehaviour {
   private void instantiatePlayerLifeIcons() {
     Debug.Log (gameObject.transform.position);
     for (float i = 0; i < this.initialPlayerLives; i++) {
-      this.playerLives.Add(Instantiate(heartPrefab, new Vector3(camera.transform.position.x - 7f + (i/4), camera.transform.position.y + 3.8f, camera.transform.position.z), heartPrefab.transform.rotation) as GameObject);
-      Debug.Log (playerLives [(int)i].transform.position);
+      this.playerLives.Add(Instantiate(heartPrefab, new Vector3(camera.transform.position.x - 7f + (i/3), camera.transform.position.y + 3.8f, camera.transform.position.z + 6f), heartPrefab.transform.rotation) as GameObject);
       this.playerLives [(int)i].transform.parent = gameObject.transform;
-      Debug.Log (playerLives [(int)i].transform.position);
-      this.playerLives [(int)i].transform.position = new Vector3 (camera.transform.position.x - 7f + (i / 4), camera.transform.position.y + 3.8f, camera.transform.position.z);
     }
   }
 
