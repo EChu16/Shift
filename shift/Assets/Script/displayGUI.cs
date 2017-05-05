@@ -31,7 +31,7 @@ public class displayGUI : MonoBehaviour {
   private void instantiatePlayerLifeIcons() {
     Debug.Log (gameObject.transform.position);
     for (float i = 0; i < this.initialPlayerLives; i++) {
-      this.playerLives.Add(Instantiate(heartPrefab, new Vector3(camera.transform.position.x - 7f + (i/3), camera.transform.position.y + 3.8f, camera.transform.position.z + 6f), heartPrefab.transform.rotation) as GameObject);
+      this.playerLives.Add(Instantiate(heartPrefab, new Vector3(camera.transform.position.x - 6.5f + (i/3), camera.transform.position.y + 3.8f, camera.transform.position.z + 6f), heartPrefab.transform.rotation) as GameObject);
       this.playerLives [(int)i].transform.parent = gameObject.transform;
     }
   }
