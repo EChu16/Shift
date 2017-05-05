@@ -101,6 +101,8 @@ namespace WorldView {
     //Keep track of player and if its dead or not
     private Player player;
 		public GameObject UI; 
+    public GameObject displayGUI;
+    private displayGUI dg;
 
     public FacingDirection getFacingDirection() {
       return this.facingDirection;
@@ -108,12 +110,12 @@ namespace WorldView {
 
     // Use this for initialization
     void Start () {
-
       //Define our facing direction, must be the same as built in inspector
       //Cache our PlayerController script located on the player and update our level data (create invisible cubes)
       facingDirection = FacingDirection.Front;
       PlayerController = Player.GetComponent<PlayerController> ();
       player = Player.GetComponent<Player> ();
+      dg = displayGUI.GetComponent<displayGUI> ();
       UpdateLevelData (true);
     }
 
@@ -246,7 +248,7 @@ namespace WorldView {
             if(PlayerController.transform.position.y - item.position.y <= WorldUnits + 0.2f && PlayerController.transform.position.y - item.position.y >0 && !PlayerController.isJumping)
             {
               if(facingDirection == FacingDirection.Front && item.position.z < PlayerController.transform.position.z)
-                moveCloser = true;
+                moveCloser = true;  
 
               if(facingDirection == FacingDirection.Back && item.position.z > PlayerController.transform.position.z)
                 moveCloser = true;

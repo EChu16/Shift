@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
     this.baseAttack = 1.0f;
     this.attackSpeed = 3.0f;
     pt = gameObject.GetComponentInChildren<PlayerTrigger> ();
+    this.gameOverScreenDisplaying = false;
 	}
 
   public float getHealth() {
