@@ -41,8 +41,8 @@ public class displayGUI : MonoBehaviour {
 
   // Update display when player loses life
   public void losePlayerLife() {
-    Destroy(playerLives[0]);
-    playerLives.Remove(playerLives[0]);
+    Destroy(playerLives[playerLives.Count - 1]);
+    playerLives.Remove(playerLives[playerLives.Count - 1]);
   }
 
 
@@ -52,7 +52,6 @@ public class displayGUI : MonoBehaviour {
   }
 
   private void renderGUI(Vector3 positionDiff) {
-    Debug.Log (positionDiff);
     gameObject.transform.Translate (positionDiff);
     lastCameraPos = camera.transform.position;
   }
