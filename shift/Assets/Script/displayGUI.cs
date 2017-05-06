@@ -30,7 +30,7 @@ public class displayGUI : MonoBehaviour {
   // Instantiate heart icons for both players
   private void instantiatePlayerLifeIcons() {
     for (float i = 0; i < this.initialPlayerLives; i++) {
-      this.playerLives.Add(Instantiate(heartPrefab, new Vector3(camera.transform.position.x - 6.5f + (i/3), camera.transform.position.y + 3.8f, camera.transform.position.z + 6f), heartPrefab.transform.rotation) as GameObject);
+      this.playerLives.Add(Instantiate(heartPrefab, new Vector3(camera.transform.position.x - 3.4f + (i/3), camera.transform.position.y + 2f, camera.transform.position.z + 30f), heartPrefab.transform.rotation) as GameObject);
       this.playerLives [(int)i].transform.parent = Camera.main.transform;
     }
   }
