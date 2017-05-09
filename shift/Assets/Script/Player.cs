@@ -11,11 +11,24 @@ public class Player : MonoBehaviour {
 	public GameObject UI;
   private bool gameOverScreenDisplaying;
   private displayGUI dg;
+	public GameObject otherObject;
+	Animator otherAnimator;
+	public float Delay;
+	public bool Delaybool;
+	SpriteRenderer renderer;
 
 	// Use this for initialization
 	void Start () {
+		Delaybool = true; 
+
+
+		renderer = otherObject.GetComponent<SpriteRenderer>(); 
+		
+		Delay = 4f;
+				
     this.baseAttack = 1.0f;
     this.attackSpeed = 3.0f;
+		otherAnimator = otherObject.GetComponent<Animator> ();
     pt = gameObject.GetComponentInChildren<PlayerTrigger> ();
     dg = GameObject.FindWithTag ("displayGUI").GetComponent<displayGUI>();
     this.gameOverScreenDisplaying = false;
@@ -23,13 +36,32 @@ public class Player : MonoBehaviour {
 
   public float getHealth() {
     return healthPoints;
+
   }
 
   public void loseHealth(float hp) {
-    this.healthPoints -= hp;
 
-    dg.losePlayerLife ();
-  }
+
+		this.healthPoints -= hp;
+		dg.losePlayerLife ();
+		while (Delaybool == true) {
+			if (Delay < 1.1) {  
+				renderer.color = new Color (10, 1, 0);
+				Delaybool = false;
+			} else {
+				renderer.color = new Color (0, 0, 0);
+				print (Delay);
+				Delay -= Time.deltaTime;
+
+			}
+		}
+	}
+
+	
+  
+
+	
+
 
   public bool isDead() {
     return this.healthPoints <= 0;
