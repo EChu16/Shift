@@ -218,7 +218,11 @@ public class Enemy : MonoBehaviour {
     this.hp -= amt;
     this.isHit = true;
     this.hitExpTime = 0.8f;
-    this.hitMarkerDelay = 0.25f;
+    if (this.id == Mob.KNIGHT && gm.getFacingDirection () == this.chosenDirection) {
+      //Do nothing
+    } else {
+      this.hitMarkerDelay = 0.25f;
+    }
   }
 
   public bool isHittable() {
