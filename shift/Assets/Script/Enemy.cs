@@ -237,7 +237,7 @@ public class Enemy : MonoBehaviour {
   private void flashHitMarker() {
     foreach (Transform child in transform)
     {
-      child.transform.GetComponent<SpriteRenderer> ().color = new Color (10, 1, 0);
+      child.transform.GetComponent<SpriteRenderer> ().color = new Color (1, 0, 0);
     }
   }
 
@@ -253,7 +253,7 @@ public class Enemy : MonoBehaviour {
     updateEnemyAI ();
     if (isDead ()) {
       enemyDieAnimation ();
-      Instantiate (coin, transform.position, Quaternion.identity);	 
+      //Instantiate (coin, transform.position, Quaternion.identity);	 
     } else {
       if (this.hitMarkerDelay > 0) {
         this.flashHitMarker ();

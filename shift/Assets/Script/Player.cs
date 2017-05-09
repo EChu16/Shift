@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 		renderer = otherObject.GetComponent<SpriteRenderer>();	
     this.baseAttack = 1.0f;
-    this.attackSpeed = 3.0f;
+    this.attackSpeed = 4.0f;
 		otherAnimator = otherObject.GetComponent<Animator> ();
     pt = gameObject.GetComponentInChildren<PlayerTrigger> ();
     dg = GameObject.FindWithTag ("displayGUI").GetComponent<displayGUI>();
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
   }
 
   private void flashHitMarker() {
-    renderer.color = new Color (10, 1, 0);
+    renderer.color = new Color (1, 0, 0);
   }
 
   private void displayNormalState() {
