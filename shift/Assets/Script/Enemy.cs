@@ -235,11 +235,17 @@ public class Enemy : MonoBehaviour {
   }
 
   private void flashHitMarker() {
-    //renderer.color = new Color (10, 1, 0);
+    foreach (Transform child in transform)
+    {
+      child.transform.GetComponent<SpriteRenderer> ().color = new Color (10, 1, 0);
+    }
   }
 
   private void displayNormalState() {
-    //renderer.color = Color.white;
+    foreach (Transform child in transform)
+    {
+      child.transform.GetComponent<SpriteRenderer> ().color = Color.white;
+    }
   }
 
 	// Update is called once per frame
@@ -251,6 +257,7 @@ public class Enemy : MonoBehaviour {
     } else {
       if (this.hitMarkerDelay > 0) {
         this.flashHitMarker ();
+        this.hitMarkerDelay -= Time.deltaTime;
       } else {
         this.displayNormalState ();
       }
