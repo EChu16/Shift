@@ -13,19 +13,12 @@ public class Player : MonoBehaviour {
   private displayGUI dg;
 	public GameObject otherObject;
 	Animator otherAnimator;
-	public float Delay;
-	public bool Delaybool;
+	public float hitMarkerDelay;
 	SpriteRenderer renderer;
 
 	// Use this for initialization
 	void Start () {
-		Delaybool = true; 
-
-
-		renderer = otherObject.GetComponent<SpriteRenderer>(); 
-		
-		Delay = 4f;
-				
+		renderer = otherObject.GetComponent<SpriteRenderer>();	
     this.baseAttack = 1.0f;
     this.attackSpeed = 3.0f;
 		otherAnimator = otherObject.GetComponent<Animator> ();
@@ -36,32 +29,21 @@ public class Player : MonoBehaviour {
 
   public float getHealth() {
     return healthPoints;
+  }
 
+  private void flashHitMarker() {
+    renderer.color = new Color (10, 1, 0);
+  }
+
+  private void displayNormalState() {
+    renderer.color = Color.white;
   }
 
   public void loseHealth(float hp) {
-
-
 		this.healthPoints -= hp;
 		dg.losePlayerLife ();
-		while (Delaybool == true) {
-			if (Delay < 1.1) {  
-				renderer.color = new Color (10, 1, 0);
-				Delaybool = false;
-			} else {
-				renderer.color = new Color (0, 0, 0);
-				print (Delay);
-				Delay -= Time.deltaTime;
-
-			}
-		}
+    this.hitMarkerDelay = 0.25f;
 	}
-
-	
-  
-
-	
-
 
   public bool isDead() {
     return this.healthPoints <= 0;
@@ -95,11 +77,18 @@ public class Player : MonoBehaviour {
     if (this.isDead ()) {
       //Destroy (gameObject);
       if (!gameOverScreenDisplaying) {
-				GameObject gameOverUI =  Instantiate (UI);
-				gameOverUI.GetComponent<Canvas>().worldCamera = Camera.main;
-				gameOverUI.GetComponent<Canvas> ().planeDistance = 10;
+        GameObject gameOverUI = Instantiate (UI);
+        gameOverUI.GetComponent<Canvas> ().worldCamera = Camera.main;
+        gameOverUI.GetComponent<Canvas> ().planeDistance = 10;
       }
       gameOverScreenDisplaying = true;
+    } else {
+      if (this.hitMarkerDelay > 0) {
+        this.flashHitMarker ();
+        this.hitMarkerDelay -= Time.deltaTime;
+      } else {
+        this.displayNormalState ();
+      }
     }
 	}
 }

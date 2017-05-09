@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour {
   private bool isAttacking;
   private float attackTime;
   private float attackRange;
+  private float hitMarkerDelay;
 
 	// Use this for initialization
 	void Start () {
@@ -217,6 +218,7 @@ public class Enemy : MonoBehaviour {
     this.hp -= amt;
     this.isHit = true;
     this.hitExpTime = 0.8f;
+    this.hitMarkerDelay = 0.25f;
   }
 
   public bool isHittable() {
@@ -232,12 +234,26 @@ public class Enemy : MonoBehaviour {
     Destroy(gameObject);
   }
 
+  private void flashHitMarker() {
+    //renderer.color = new Color (10, 1, 0);
+  }
+
+  private void displayNormalState() {
+    //renderer.color = Color.white;
+  }
+
 	// Update is called once per frame
 	void Update () {
     updateEnemyAI ();
-    if(isDead()) {
-      enemyDieAnimation();
-			Instantiate (coin, transform.position, Quaternion.identity);	 
+    if (isDead ()) {
+      enemyDieAnimation ();
+      Instantiate (coin, transform.position, Quaternion.identity);	 
+    } else {
+      if (this.hitMarkerDelay > 0) {
+        this.flashHitMarker ();
+      } else {
+        this.displayNormalState ();
+      }
     }
 	}
 }
